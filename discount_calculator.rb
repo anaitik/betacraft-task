@@ -16,5 +16,21 @@ class DiscountCalculator
   
     user_input.each { |item| @items[item.capitalize] += 1 }
   end
+  private
+  
+    def calculate_total_price
+      @total_price = 0.0
+    
+      PRICING_TABLE.each do |item, details|
+        quantity = @items[item]
+        if details.key?(:sale_quantity) && quantity >= details[:sale_quantity]
+          sale_price_items = (quantity / details[:sale_quantity]) * details[:sale_price]
+          remaining_items = (quantity % details[:sale_quantity]) * details[:unit_price]
+          @total_price += sale_price_items + remaining_items
+        else
+          @total_price += quantity * details[:unit_price]
+        end
+      end
+    end
 
 end
