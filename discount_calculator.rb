@@ -35,7 +35,7 @@ class DiscountCalculator
         end
       end
     end
-    
+     # Commit Comment : display request iterates over and gets the price to show
     def display_receipt
       puts "\nItem\tQuantity\tPrice\n--------------------------------------"
       
