@@ -9,4 +9,12 @@ class DiscountCalculator
   def initialize
     @items = Hash.new(0)
   end
+
+  def run
+    puts 'Please enter all the items purchased separated by a comma:'
+    user_input = gets.chomp.downcase.split(',').map(&:strip)
+  
+    user_input.each { |item| @items[item.capitalize] += 1 }
+  end
+
 end
