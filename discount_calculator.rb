@@ -43,7 +43,19 @@ class DiscountCalculator
         puts "#{item}\t#{quantity}\t\t$#{'%.2f' % (quantity * details[:unit_price])}" unless quantity.zero?
       end
       puts "\nTotal price: $#{'%.2f' % @total_price}"
+      puts "You saved $#{'%.2f' % (calculate_total_saved)} today."
     end
+    # Commit: Implement the method to calculate total savings
+    def calculate_total_saved
+      total_regular_price = 0.0
+    
+      PRICING_TABLE.each do |item, details|
+        total_regular_price += @items[item] * details[:unit_price]
+      end
+    
+      total_regular_price - @total_price
+    end
+
 end
 
 DiscountCalculator.new.run
