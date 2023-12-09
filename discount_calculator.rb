@@ -1,4 +1,5 @@
 class DiscountCalculator
+  
   PRICING_TABLE = {
     'Milk' => { unit_price: 3.97, sale_quantity: 2, sale_price: 5.00 },
     'Bread' => { unit_price: 2.17, sale_quantity: 3, sale_price: 6.00 },
@@ -19,9 +20,9 @@ class DiscountCalculator
     display_receipt
   end
   private
-  
+ #  Method Implementated for total price for the items 
     def calculate_total_price
-      @total_price = 0.0
+      @total_price = 0.0   
     
       PRICING_TABLE.each do |item, details|
         quantity = @items[item]
@@ -37,10 +38,10 @@ class DiscountCalculator
     
     def display_receipt
       puts "\nItem\tQuantity\tPrice\n--------------------------------------"
-    
+      
       PRICING_TABLE.each do |item, details|
         quantity = @items[item]
-        puts "#{item}\t#{quantity}\t\t$#{'%.2f' % (quantity * details[:unit_price])}" unless quantity.zero?
+        puts "#{item}\t#{quantity}\t\t$#{'%.2f' % (quantity * details[:unit_price])}" unless quantity.zero? # exception
       end
       puts "\nTotal price: $#{'%.2f' % @total_price}"
       puts "You saved $#{'%.2f' % (calculate_total_saved)} today."
@@ -57,5 +58,6 @@ class DiscountCalculator
     end
 
 end
-
-DiscountCalculator.new.run
+ 
+# Commit : Command to run the script
+DiscountCalculator.new.run 
