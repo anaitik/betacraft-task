@@ -15,6 +15,8 @@ class DiscountCalculator
     user_input = gets.chomp.downcase.split(',').map(&:strip)
   
     user_input.each { |item| @items[item.capitalize] += 1 }
+    calculate_total_price
+    display_receipt
   end
   private
   
@@ -32,5 +34,16 @@ class DiscountCalculator
         end
       end
     end
-
+    
+    def display_receipt
+      puts "\nItem\tQuantity\tPrice\n--------------------------------------"
+    
+      PRICING_TABLE.each do |item, details|
+        quantity = @items[item]
+        puts "#{item}\t#{quantity}\t\t$#{'%.2f' % (quantity * details[:unit_price])}" unless quantity.zero?
+      end
+      puts "\nTotal price: $#{'%.2f' % @total_price}"
+    end
 end
+
+DiscountCalculator.new.run
